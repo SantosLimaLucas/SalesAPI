@@ -1,6 +1,6 @@
-package com.example.salesapi;
+package com.example.salesapi.Model;
 
-public class Vendedor {
+public class VendedorModel {
 
     private String nome;
     private long id;
