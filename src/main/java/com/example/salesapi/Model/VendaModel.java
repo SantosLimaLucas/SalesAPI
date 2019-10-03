@@ -15,14 +15,16 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VendaModel {
-
     @Id
     @GeneratedValue
     private long id;
     @GeneratedValue
     private Date dataDeVenda;
+
     private double valor;
     private String nomeVendedor;
     private long idVendedor;
+
+
 
 }

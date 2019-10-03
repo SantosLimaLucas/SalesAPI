@@ -1,23 +1,25 @@
 package com.example.salesapi.Model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class VendedorModel {
-
-    private String nome;
+    @Id
+    @GeneratedValue
     private long id;
+    private String nome;
 
-    public String getNome() {
-        return nome;
-    }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 }
