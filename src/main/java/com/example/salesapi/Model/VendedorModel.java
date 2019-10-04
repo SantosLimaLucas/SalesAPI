@@ -1,29 +1,35 @@
 package com.example.salesapi.Model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.io.Serializable;
-import java.util.ArrayList;
+import javax.persistence.*;
 import java.util.List;
-
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class VendedorModel implements Serializable {
+@SequenceGenerator(name="sequencia_vendedor", sequenceName ="sequencia_vendedor", initialValue = 1, allocationSize = 1)
+public class VendedorModel {
     @Id
-    @GeneratedValue
-    private int id;
-    private String nome;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequencia_vendedor")
+    private int idVendedor;
+    private String nomeVendedor;
 
     /**
      * Lista de vendas realizadas por um vendedor.
      */
-    public List<VendaModel> vendasEfetuadas = new ArrayList<VendaModel>();
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<VendaModel> vendasRealizadas;
+
+    /**
+     * Este método adiciona uma venda à lista de vendas de um vendedor, ele é chamado na requisição realizarVenda
+     * da classe vendedorController
+     *
+     * @param venda = Objeto venda que será adicionado
+     */
+    public void setVendasRealizadas(VendaModel venda){
+        vendasRealizadas.add(venda);
+    }
 }
