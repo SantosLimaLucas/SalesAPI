@@ -66,4 +66,6 @@ public class VendedorController {
         vendedorModel = vendedorRepository.save(vendedorModel);
         return venda;
     }
+
+
 }
