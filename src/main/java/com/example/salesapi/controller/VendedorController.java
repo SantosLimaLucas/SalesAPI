@@ -1,9 +1,10 @@
-package com.example.salesapi.Controller;
+package com.example.salesapi.controller;
 
-import com.example.salesapi.Model.VendaModel;
-import com.example.salesapi.Model.VendedorModel;
+import com.example.salesapi.model.VendaModel;
+import com.example.salesapi.model.VendedorModel;
 import com.example.salesapi.dao.VendedorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +30,8 @@ public class VendedorController {
      * @param vendedor = Objeto vendedor que será cadastrado
      *
      */
-    @RequestMapping("/cadastrarVendedor")
+    @RequestMapping("/cadastrar-vendedor")
+    @Validated
     public VendedorModel criarVendedor(@RequestBody VendedorModel vendedor){
        return vendedorRepository.save(vendedor);
     }
@@ -38,7 +40,7 @@ public class VendedorController {
      *
      * @return Esta requisição retorna uma lista com todos os vendedores cadastrados
      */
-    @RequestMapping("/vendedoresCadastrados")
+    @RequestMapping("/vendedores-cadastrados")
     public List<VendedorModel> listarVendedores(){
         return vendedorRepository.findAll();
     }
@@ -47,8 +49,8 @@ public class VendedorController {
      * @param id = identificador de um vendedor
      * @return Retorna o vendedor correspondente ao id passado por parâmetro
      */
-    @RequestMapping("/selecionarVendedorPeloID")
-    public Optional<VendedorModel> getNomeById(int id){
+    @RequestMapping("/selecionar-vendedor-pelo-id")
+    public Optional<VendedorModel> getNomeById(@RequestBody int id){
          return  vendedorRepository.findById(id);
     }
 
@@ -56,12 +58,12 @@ public class VendedorController {
      * Esta requisição adiciona uma venda na lista de vendas de um vendedor.
      *
      */
-    @RequestMapping("/RealizarVenda")
+    @RequestMapping("/realizar-venda")
+    @Validated
     public VendaModel realizarVenda(@Valid @RequestBody VendaModel venda){
         vendedorModel = vendedorRepository.getOne(venda.getIdVendedor());
         vendedorModel.setVendasRealizadas(venda);
         vendedorModel = vendedorRepository.save(vendedorModel);
         return venda;
     }
-
 }
