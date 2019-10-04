@@ -1,7 +1,7 @@
 # SalesAPI
 API capaz de gerar uma venda e retornar a lista de vendedores com os campos: nome, total de vendas do vendedor e média de vendas diária, conforme o período informado por parâmetro.
 
-#Requisições da classe VendedorController
+# Requisições da classe VendedorController
 
 ## *cadastrar vendedor
     Esta requisição é capaz de cadastrar um vendedor.
