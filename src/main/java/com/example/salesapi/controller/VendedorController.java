@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.List;
@@ -30,7 +31,7 @@ public class VendedorController {
      * @param vendedor = Objeto vendedor que será cadastrado
      *
      */
-    @RequestMapping("/cadastrar-vendedor")
+    @RequestMapping(value = "/vendedores", method = {RequestMethod.POST})
     @Validated
     public VendedorModel criarVendedor(@RequestBody VendedorModel vendedor){
        return vendedorRepository.save(vendedor);
@@ -40,7 +41,7 @@ public class VendedorController {
      *
      * @return Esta requisição retorna uma lista com todos os vendedores cadastrados
      */
-    @RequestMapping("/vendedores-cadastrados")
+    @RequestMapping(value = "/vendedores", method = {RequestMethod.GET})
     public List<VendedorModel> listarVendedores(){
         return vendedorRepository.findAll();
     }
