@@ -1,5 +1,6 @@
 package com.example.salesapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,15 +29,7 @@ public class VendedorModel {
      * Lista de vendas realizadas por um vendedor.
      */
     @OneToMany(cascade = CascadeType.ALL)
-    private List<VendaModel> vendasRealizadas;
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private List<VendaModel> vendasRealizadas = new ArrayList<>();
 
-    /**
-     * Este método adiciona uma venda à lista de vendas de um vendedor, ele é chamado na requisição realizarVenda
-     * da classe vendedorController
-     *
-     * @param venda = Objeto venda que será adicionado
-     */
-    public void setVendasRealizadas(VendaModel venda){
-        vendasRealizadas.add(venda);
-    }
 }
